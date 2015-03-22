@@ -1,6 +1,3 @@
-body {
-    padding-top: 50px;
-}
 .web-notebook {
     padding: 40px 15px;
     text-align: center;
@@ -8,17 +5,6 @@ body {
 
 html,body {
     height: 100%;
-}
-
-/* wrapper for page content to push down footer */
-.page-container {
-    min-height: 100%;
-    height: auto !important;
-    height: 100%;
-    /* negative indent footer by its height */
-    margin: 0 auto -120px;
-    /* pad bottom by footer height */
-    padding: 0 0 120px;
 }
 
 /* set the fixed height of the footer here */
@@ -48,20 +34,20 @@ html,body {
 body {
     padding-top: 51px;
     background: #1E1E1E;
-    color: #f9f9f9;
+    /*color: #f9f9f9;*/
 }
 a {
     color:#efefef;
 }
-.text-center {
-    padding-top: 20px;
-}
+/*.text-center {*/
+    /*padding-top: 20px;*/
+/*}*/
 
 #sidebar {
     height: 100%;
     padding-right: 0;
     padding-top: 20px;
-    z-index:-1;
+    /*z-index:-1;*/
 }
 
 #sidebar .affix {

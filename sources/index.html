@@ -8,14 +8,17 @@
     <link rel="stylesheet" href="css/web-notebook.css">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script type="text/javascript"
+            src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-sanitize.min.js"></script>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/textAngular/1.2.2/textAngular-sanitize.min.js'></script>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/textAngular/1.2.2/textAngular.min.js'></script>
-
+    <script src='js/ui-bootstrap-custom-0.12.1.min.js'></script>
+    <script src='js/ui-bootstrap-custom-tpls-0.12.1.min.js'></script>
 </head>
 
 <body>
 
-<div ng-controller="webNotebookCtrl" class="page-container">
+<div ng-controller="webNotebookCtrl" class="container-fluid">
 
     <!-- top navbar -->
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -40,21 +43,41 @@
     <div class="row row-offcanvas row-offcanvas-left">
 
         <!-- sidebar -->
-        <div class="col-xs-6 col-sm-2 col-md-2 col-lg-1 sidebar-offcanvas" id="sidebar" role="navigation">
-            <div data-spy="affix" data-offset-top="45" data-offset-bottom="90">
-                <ul class="nav" id="sidebar-nav">
-                    <li>toto</li>
-                </ul>
+        <div class="col-lg-3 sidebar-offcanvas" id="sidebar" role="navigation">
+            <!--<ul class="nav" id="sidebar-nav">-->
+            <!--<li><a href="#">toto</a></li>-->
+            <!--</ul>-->
+            <p>
+                <button type="button" class="btn btn-sm btn-default glyphicon glyphicon-chevron-left"
+                        ng-click="currentDay.setDate(currentDay.getDate()-1)"></button>
+                <button type="button" class="btn btn-sm btn-info" ng-click="today()">Today
+                </button>
+                <button type="button" class="btn btn-sm btn-default glyphicon glyphicon-chevron-right"
+                        ng-click="currentDay.setDate(currentDay.getDate()+1)"></button>
+            </p>
+            <div style="display:inline-block; min-height:290px;" class="text-center">
+                <datepicker ng-model="currentDay" min-date="minDate" show-weeks="false"
+                            class="well well-sm"></datepicker>
             </div>
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for..." ng-model="searchInput"
+                       ng-change="searchChange()"/>
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">Go!</button>
+                </span>
+            </div>
+            <p ng-repeat="(key, value) in searchResults">
+                <button type="button" class="btn btn-sm btn-default" ng-click="searchDisplay(key)">{{key}} - {{value}}</button>
+            </p>
         </div>
 
         <!-- main area -->
-        <div class="col-xs-12 col-sm-10 col-md-10 col-lg-11" data-spy="scroll" data-target="#sidebar-nav">
+        <div class="col-lg-9" data-spy="scroll" data-target="#sidebar-nav">
 
-            <div class="">
-                <h2>My Note</h2>
-                <div text-angular="text-angular" ng-model="json.data[currentNb][currentDay.getFullYear()][currentDay.getMonth()+1][currentDay.getDate()]" ng-change="htmlContentChange()" ta-disabled='disabled'></div>
-<div>{{json.data[currentNb][currentDay.getFullYear()][currentDay.getMonth()+1][currentDay.getDate()]}}</div>
+            <div text-angular="text-angular"
+                 ng-model="json.data[currentNb][currentDay.getFullYear()][currentDay.getMonth()+1][currentDay.getDate()]"
+                 ta-disabled='disabled'></div>
+            <div>
             </div>
         </div>
     </div>
@@ -87,10 +110,13 @@
                         <a href="#">Impressum</a>
                     </li>
                 </ul>
-            </div><!--/row-->
+            </div>
+            <!--/row-->
 
-        </div><!--/container-->
-    </div><!--/footer-->
+        </div>
+        <!--/container-->
+    </div>
+    <!--/footer-->
 </div>
 <script type="text/javascript" src="js/webNotebook.js"></script>
 <script type="text/javascript" src="js/webNotebookCtrl.js"></script>

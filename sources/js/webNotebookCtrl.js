@@ -1,7 +1,11 @@
 /**
  * Created by elyaet on 16/03/15.
  */
-app.controller("webNotebookCtrl", function ($scope, $location, $http, $sce) {
+app.controller("webNotebookCtrl", function ($scope, $location, $http, $interval) {
+    $scope.queue = {
+        "data": {}
+    };
+    var inter;
     $scope.loading = true;
     $http.get('ctrl.php').success(function (data) {
         $scope.json = data;
@@ -32,6 +36,42 @@ app.controller("webNotebookCtrl", function ($scope, $location, $http, $sce) {
             }
         }
     };
+
+    $scope.currentContentChange = function () {
+        if (!$scope.queue.data[$scope.currentNb]) {
+            $scope.queue.data[$scope.currentNb] = {};
+        }
+        if (!$scope.queue.data[$scope.currentNb][$scope.currentDay.getFullYear()])
+            $scope.queue.data[$scope.currentNb][$scope.currentDay.getFullYear()] = {};
+        if (!$scope.queue.data[$scope.currentNb][$scope.currentDay.getFullYear()][$scope.currentDay.getMonth() + 1])
+            $scope.queue.data[$scope.currentNb][$scope.currentDay.getFullYear()][$scope.currentDay.getMonth() + 1] = {};
+        if (!$scope.queue.data[$scope.currentNb][$scope.currentDay.getFullYear()][$scope.currentDay.getMonth() + 1][$scope.currentDay.getDate()]) {
+            $scope.queue.data[$scope.currentNb][$scope.currentDay.getFullYear()][$scope.currentDay.getMonth() + 1][$scope.currentDay.getDate()] = $scope.json.data[$scope.currentNb][$scope.currentDay.getFullYear()][$scope.currentDay.getMonth() + 1][$scope.currentDay.getDate()];
+        }
+        if (angular.isDefined(inter)) return;
+
+        inter = $interval(function () {
+            $scope.loading = true;
+            console.log("Sending data...");
+            console.log($scope.queue);
+            $interval.cancel(inter);
+            inter = undefined;
+            $http.post('ctrl-post.php', $scope.queue).
+                success(function (data, status, headers, config) {
+                    // this callback will be called asynchronously
+                    // when the response is available
+                    console.log("Send OK");
+                    $scope.loading = false;
+                }).
+                error(function (data, status, headers, config) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                    console.log("Send KO !!");
+                    $scope.loading = false;
+                });
+        }, $scope.json.config.saveInterval);
+    };
+
 
     $scope.searchChange = function () {
         var count = 0;

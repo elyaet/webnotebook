@@ -1,0 +1,34 @@
+{
+  "config": {
+    "default": "Perso",
+    "minSearchCar": 3,
+    "maxResults": 10,
+    "saveInterval": 2000
+  },
+  "data": {
+    "Perso": {
+      "2013": {
+        "1": {
+          "1": "<div>plop</div>",
+          "28": "kjhkjh kj kjl"
+        }
+      },
+      "2015": {
+        "1": {"6": "poiu"},
+        "3": {
+          "1": "pouio",
+          "24": "<p>azezaeazqsdfdsfs<br/></p>"
+        }
+      }
+    },
+    "Pro": {
+      "2013": {
+        "2": {
+          "1": "ert",
+          "2": "qsd"
+        }
+      },
+      "2015": {"1": {"1": "qsd"}}
+    }
+  }
+}

@@ -12,23 +12,35 @@ error_log(json_encode($json2));
 //FIXME : recursive !!
 foreach ($json2['data'] as $keyNb => $entryNb) {
     foreach ($json2['data'][$keyNb] as $keyYear => $entryYear) {
-        if (!array_key_exists($keyYear, $json1['data'][$keyNb])) {
-            error_log("inside Year");
-            $json1['data'][$keyNb][$keyYear] = $entryYear;
-        } else {
-            foreach ($json2['data'][$keyNb][$keyYear] as $keyMonth => $entryMonth) {
-                if (!array_key_exists($keyMonth, $json1['data'][$keyNb][$keyYear])) {
-                    error_log("inside Month");
-                    $json1['data'][$keyNb][$keyYear][$keyMonth] = $entryMonth;
+        foreach ($json2['data'][$keyNb][$keyYear] as $keyMonth => $entryMonth) {
+            foreach ($json2['data'][$keyNb][$keyYear][$keyMonth] as $keyDay => $entryDay) {
+                if ($entryDay != "") {
+                    if (!array_key_exists($keyYear, $json1['data'][$keyNb])) {
+                        error_log("Create Year " . $keyYear);
+                        $json1['data'][$keyNb][$keyYear] = $entryYear;
+                    }
+                    if (!array_key_exists($keyMonth, $json1['data'][$keyNb][$keyYear])) {
+                        error_log("Create Month " . $keyMonth);
+                        $json1['data'][$keyNb][$keyYear][$keyMonth] = $entryMonth;
+                    }
+                    error_log("Create/update Day " . $keyDay);
+                    $json1['data'][$keyNb][$keyYear][$keyMonth][$keyDay] = $entryDay;
                 } else {
-                    foreach ($json2['data'][$keyNb][$keyYear][$keyMonth] as $keyDay => $entryDay) {
-                        error_log("inside Day");
-                        $json1['data'][$keyNb][$keyYear][$keyMonth][$keyDay] = $entryDay;
+                    if (array_key_exists($keyDay, $json1['data'][$keyNb][$keyYear][$keyMonth])) {
+                        error_log("Delete day " . $keyYear . "/" . $keyMonth . "/" . $keyDay . " from json source");
+                        unset($json1['data'][$keyNb][$keyYear][$keyMonth][$keyDay]);
+                        if (count($json1['data'][$keyNb][$keyYear][$keyMonth]) == 0) {
+                            error_log("Delete month " . $keyYear . "/" . $keyMonth . " from json source");
+                            unset($json1['data'][$keyNb][$keyYear][$keyMonth]);
+                        }
+                        if (count($json1['data'][$keyNb][$keyYear]) == 0) {
+                            error_log("Delete year " . $keyYear . " from json source");
+                            unset($json1['data'][$keyNb][$keyYear]);
+                        }
                     }
                 }
             }
         }
     }
 }
-
 file_put_contents("data-light.json", json_encode($json1));

@@ -38,16 +38,22 @@ app.controller("webNotebookCtrl", function ($scope, $location, $http, $interval)
     };
 
     $scope.currentContentChange = function () {
+        console.log($scope.json.data[$scope.currentNb][$scope.currentDay.getFullYear()][$scope.currentDay.getMonth() + 1][$scope.currentDay.getDate()]);
+
         if (!$scope.queue.data[$scope.currentNb]) {
             $scope.queue.data[$scope.currentNb] = {};
+            console.log("Add new Notebook in queue ");
         }
-        if (!$scope.queue.data[$scope.currentNb][$scope.currentDay.getFullYear()])
+        if (!$scope.queue.data[$scope.currentNb][$scope.currentDay.getFullYear()]) {
             $scope.queue.data[$scope.currentNb][$scope.currentDay.getFullYear()] = {};
-        if (!$scope.queue.data[$scope.currentNb][$scope.currentDay.getFullYear()][$scope.currentDay.getMonth() + 1])
-            $scope.queue.data[$scope.currentNb][$scope.currentDay.getFullYear()][$scope.currentDay.getMonth() + 1] = {};
-        if (!$scope.queue.data[$scope.currentNb][$scope.currentDay.getFullYear()][$scope.currentDay.getMonth() + 1][$scope.currentDay.getDate()]) {
-            $scope.queue.data[$scope.currentNb][$scope.currentDay.getFullYear()][$scope.currentDay.getMonth() + 1][$scope.currentDay.getDate()] = $scope.json.data[$scope.currentNb][$scope.currentDay.getFullYear()][$scope.currentDay.getMonth() + 1][$scope.currentDay.getDate()];
+            console.log("Add new Year in queue ");
         }
+        if (!$scope.queue.data[$scope.currentNb][$scope.currentDay.getFullYear()][$scope.currentDay.getMonth() + 1]) {
+            $scope.queue.data[$scope.currentNb][$scope.currentDay.getFullYear()][$scope.currentDay.getMonth() + 1] = {};
+            console.log("Add new Month in queue ");
+        }
+        $scope.queue.data[$scope.currentNb][$scope.currentDay.getFullYear()][$scope.currentDay.getMonth() + 1][$scope.currentDay.getDate()] = $scope.json.data[$scope.currentNb][$scope.currentDay.getFullYear()][$scope.currentDay.getMonth() + 1][$scope.currentDay.getDate()];
+        console.log("Add/Update Day in queue with data " + $scope.queue.data[$scope.currentNb][$scope.currentDay.getFullYear()][$scope.currentDay.getMonth() + 1][$scope.currentDay.getDate()]);
         if (angular.isDefined(inter)) return;
 
         inter = $interval(function () {
@@ -61,6 +67,9 @@ app.controller("webNotebookCtrl", function ($scope, $location, $http, $interval)
                     // this callback will be called asynchronously
                     // when the response is available
                     console.log("Send OK");
+                    $scope.queue = {
+                        "data": {}
+                    };
                     $scope.loading = false;
                 }).
                 error(function (data, status, headers, config) {
@@ -71,7 +80,6 @@ app.controller("webNotebookCtrl", function ($scope, $location, $http, $interval)
                 });
         }, $scope.json.config.saveInterval);
     };
-
 
     $scope.searchChange = function () {
         var count = 0;
@@ -92,18 +100,17 @@ app.controller("webNotebookCtrl", function ($scope, $location, $http, $interval)
                 });
             });
         }
-        ;
     };
 
 
     $scope.htmlToPlaintext = function (text) {
         return String(text).replace(/<[^>]+>/gm, '');
-    }
+    };
 
 
     $scope.searchDisplay = function (key) {
         $scope.currentDay = new Date(key);
-    }
+    };
 
     $scope.today = function () {
         $scope.currentDay = new Date();

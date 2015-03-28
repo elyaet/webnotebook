@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html ng-app="webNotebookApp" xmlns="http://www.w3.org/1999/html">
+<html ng-app="webNotebookApp">
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <link rel='stylesheet prefetch' href='http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css'>
     <link rel="stylesheet" href="css/textAngular.css">
-    <link rel="stylesheet" href="css/web-notebook.css">
+    <link rel="stylesheet" href="css/webNotebook.css">
+    <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel='stylesheet prefetch' href='https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css'>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
     <script type="text/javascript"
             src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-sanitize.min.js"></script>
-    <script src='http://cdnjs.cloudflare.com/ajax/libs/textAngular/1.2.2/textAngular-sanitize.min.js'></script>
-    <script src='http://cdnjs.cloudflare.com/ajax/libs/textAngular/1.2.2/textAngular.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/textAngular/1.2.2/textAngular-sanitize.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/textAngular/1.2.2/textAngular.min.js'></script>
     <script src='js/ui-bootstrap-custom-0.12.1.min.js'></script>
     <script src='js/ui-bootstrap-custom-tpls-0.12.1.min.js'></script>
 </head>
@@ -89,28 +89,10 @@
             <div class="row">
                 <ul class="list-unstyled">
                     <li class="col-sm-4 col-xs-6">
-                        <a href="#">About</a>
+                        <a href="mailto:elyaet@gmail.com">Contact</a>
                     </li>
                     <li class="col-sm-4 col-xs-6">
-                        <a href="#">Services</a>
-                    </li>
-                    <li class="col-sm-4 col-xs-6">
-                        <a href="#">Studies</a>
-                    </li>
-                    <li class="col-sm-4 col-xs-6">
-                        <a href="#">References</a>
-                    </li>
-                    <li class="col-sm-4 col-xs-6">
-                        <a href="#">Login</a>
-                    </li>
-                    <li class="col-sm-4 col-xs-6">
-                        <a href="#">Press</a>
-                    </li>
-                    <li class="col-sm-4 col-xs-6">
-                        <a href="#">Contact</a>
-                    </li>
-                    <li class="col-sm-4 col-xs-6">
-                        <a href="#">Impressum</a>
+                        <a href="https://github.com/elyaet/webnotebook">GitHub</a>
                     </li>
                 </ul>
             </div>

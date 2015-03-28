@@ -2,7 +2,8 @@
   "config": {
     "default": "Perso",
     "minSearchCar": 3,
-    "maxResults": 10
+    "maxResults": 10,
+    "saveInterval": 2000
   },
   "data": {
     "Perso": {

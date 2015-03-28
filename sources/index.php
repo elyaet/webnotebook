@@ -3,10 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/textAngular.css">
-    <link rel="stylesheet" href="css/webNotebook.css">
     <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel='stylesheet prefetch' href='https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css'>
+    <link rel="stylesheet" href="css/textAngular.css">
+    <link rel="stylesheet" href="css/webNotebook.css">
+
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
     <script type="text/javascript"
@@ -46,9 +47,6 @@
 
         <!-- sidebar -->
         <div class="col-lg-3 sidebar-offcanvas" id="sidebar" role="navigation">
-            <!--<ul class="nav" id="sidebar-nav">-->
-            <!--<li><a href="#">toto</a></li>-->
-            <!--</ul>-->
             <p>
                 <button type="button" class="btn btn-sm btn-default glyphicon glyphicon-chevron-left"
                         ng-click="currentDay.setDate(currentDay.getDate()-1)"></button>
